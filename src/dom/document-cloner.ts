@@ -541,8 +541,7 @@ const iframeLoader = (iframe: HTMLIFrameElement): Promise<HTMLIFrameElement> => 
 
         cloneWindow.onload = iframe.onload = () => {
             cloneWindow.onload = iframe.onload = null;
-            const interval = setInterval(() => {
-                if (documentClone.body.childNodes.length > 0 && documentClone.readyState === 'complete') {
+                if (documentClone.body.childNodes.length > 0 && (documentClone.readyState === 'complete' || documentClone.readyState === 'interactive') {
                     clearInterval(interval);
                     resolve(iframe);
                 }
